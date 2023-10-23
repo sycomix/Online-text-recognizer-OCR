@@ -26,13 +26,7 @@ def dorotate(path):
         angle = cv.minAreaRect(coords)[-1]
 
 
-        if angle < -45:
-                angle = -(90 + angle)
-
-
-        else:
-                angle = -angle
-
+        angle = -(90 + angle) if angle < -45 else -angle
         (h, w) = image.shape[:2]
         center = (w // 2, h // 2)
         M = cv.getRotationMatrix2D(center, angle, 1.0)
@@ -40,7 +34,7 @@ def dorotate(path):
                 flags=cv.INTER_CUBIC, borderMode=cv.BORDER_REPLICATE)
 
 
-         
+
         # show the output image
         print("[INFO] angle: {:.3f}".format(angle))
 
